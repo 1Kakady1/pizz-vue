@@ -4,10 +4,11 @@
         title="Title from vue-headful"
         description="Description from vue-headful"
       />
-    <Header v-bind:menuList="[{id:'1',title:'Home',href:'/'}]" />
+    <Header />
     <SliderHome 
       :slidesItem="slidesItem"
     />
+    <FooterMob />
   </div>
 </template>
 
@@ -15,6 +16,7 @@
 import { db } from '../main'
 import Vue from 'vue';
 import Header from "../components/header/Header.vue"
+import FooterMob from "../components/FooterMobail"
 import SliderHome from "../components/sliders/SliderHome"
 import vueHeadful from 'vue-headful';
 
@@ -25,14 +27,15 @@ export default {
   components: {
     Header,
     SliderHome,
+    FooterMob
   },
   data(){
     return{
       post: [],
       slidesItem:[
-        {bg:'https://media-cdn.tripadvisor.com/media/photo-s/0e/a0/60/f3/salamina.jpg',type:"img"},
+        {bg:'https://media-cdn.tripadvisor.com/media/photo-s/0e/a0/60/f3/salamina.jpg',type:"img",title:"We have the Best ",desc:"We have the Best "},
         {bg:'https://firebasestorage.googleapis.com/v0/b/pizza-vue-fb264.appspot.com/o/video%2Fvideo.mp4?alt=media&token=ce0c9dcb-14e3-4794-858d-3026c4a3522f',type:"video"},
-        {bg:'https://www.pizzachicago.com/wp-content/uploads/pizza-joliet-lake.jpg',type:"img"},
+        {bg:'https://www.pizzachicago.com/wp-content/uploads/pizza-joliet-lake.jpg',type:"img",title:"We have the Best ",desc:"We have the Best "},
         {bg:'https://content3.jdmagicbox.com/comp/chandigarh/x3/0172px172.x172.170113080932.p8x3/catalogue/pizzeria-chandigarh-pizza-outlets-9cv4h.jpg',type:"img"}
       ],
     }

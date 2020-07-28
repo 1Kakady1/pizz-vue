@@ -69,7 +69,7 @@ export default {
                 undefined,
                 this.nextSlide
             );
-      },10000)
+      },1000000)
   },
   destroyed() {
     clearInterval(this.sliderTimer);
@@ -160,7 +160,7 @@ export default {
     .preloader
         position: absolute;
         width: 100%;
-        top: 0;
+        top: 113px;
         left: 0;
         z-index: -1;
         height: 100%;
@@ -217,4 +217,6 @@ export default {
                         svg
                             width: 60px
                             height: 60px
+            .preloader
+                top: 0;
 </style>

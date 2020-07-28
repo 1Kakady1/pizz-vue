@@ -39,7 +39,6 @@ export default {
     width: 190px;
 }
 
-
 html, body, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video
 {
 	border: 0;
@@ -148,7 +147,14 @@ body {
     position: relative;
     padding: 0;
     background: #fff;
-    margin-left: 250px;
+    margin-left: 0px;
+}
+
+@media screen and (min-width: 996px){
+	.container-wrapper {
+		margin-left: 250px;
+	}
+
 }
 
 #container {
@@ -242,13 +248,6 @@ ol li li {
 	margin: 0 0 1.714285714rem;
 }
 
- embed,
- iframe,
- object,
- video {
-	margin-bottom: 24px;
-	margin-bottom: 1.714285714rem;
-}
  dl {
 	margin: 0 1.714285714rem;
 	margin-bottom: 30px;
@@ -290,10 +289,6 @@ ol li li {
 table th {
 	color: #000;
 	font-weight: 700;
-}
-
- embed,  iframe,  object,  video {
-    max-width: 100%;
 }
 
  dl.gallery-item {
