@@ -1,0 +1,65 @@
+<template>
+  <div id="home">
+      <vue-headful
+        title="Title from vue-headful"
+        description="Description from vue-headful"
+      />
+    <Header v-bind:menuList="[{id:'1',title:'Home',href:'/'}]" />
+    <SliderHome 
+      :slidesItem="slidesItem"
+    />
+  </div>
+</template>
+
+<script>
+import { db } from '../main'
+import Vue from 'vue';
+import Header from "../components/header/Header.vue"
+import SliderHome from "../components/sliders/SliderHome"
+import vueHeadful from 'vue-headful';
+
+Vue.component('vue-headful', vueHeadful);
+
+export default {
+  name: 'Home',
+  components: {
+    Header,
+    SliderHome,
+  },
+  data(){
+    return{
+      post: [],
+      slidesItem:[
+        {bg:'https://media-cdn.tripadvisor.com/media/photo-s/0e/a0/60/f3/salamina.jpg',type:"img"},
+        {bg:'https://firebasestorage.googleapis.com/v0/b/pizza-vue-fb264.appspot.com/o/video%2Fvideo.mp4?alt=media&token=ce0c9dcb-14e3-4794-858d-3026c4a3522f',type:"video"},
+        {bg:'https://www.pizzachicago.com/wp-content/uploads/pizza-joliet-lake.jpg',type:"img"},
+        {bg:'https://content3.jdmagicbox.com/comp/chandigarh/x3/0172px172.x172.170113080932.p8x3/catalogue/pizzeria-chandigarh-pizza-outlets-9cv4h.jpg',type:"img"}
+      ],
+    }
+  },
+  methods:{
+    send: async ()=> {
+      await db.collection('products').get().then(
+        r => {
+          r.forEach((doc) => {
+            console.log("======>",doc.data())
+          })
+        }
+      ).catch(e=>console.log("error ======>",e))
+      
+      }
+  },
+//    firestore () {
+//     return {
+//       post: db.collection('products')
+//     }
+//  }
+}
+</script>
+
+<style lang="sass">
+  button
+    position: absolute
+    z-index: 111
+</style>
+
