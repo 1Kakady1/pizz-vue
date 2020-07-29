@@ -52,9 +52,9 @@
             }
             
         },
-        created(){
-            console.log("------->",router.options.routes)
-        },
+        // created(){
+        //     //console.log("routs ------->",router.options.routes)
+        // },
         components: {
             SocialList,
         },

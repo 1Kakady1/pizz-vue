@@ -17,7 +17,7 @@ import { db } from '../main'
 import Vue from 'vue';
 import Header from "../components/header/Header.vue"
 import FooterMob from "../components/FooterMobail"
-import SliderHome from "../components/sliders/SliderHome"
+import SliderHome from "../components/sliders/SliderHome.vue"
 import vueHeadful from 'vue-headful';
 
 Vue.component('vue-headful', vueHeadful);

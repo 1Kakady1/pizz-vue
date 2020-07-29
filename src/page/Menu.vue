@@ -1,24 +1,49 @@
 <template>
-  <div id="menu">
-      <h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et veritatis quos suscipit! Non iusto architecto illum officia veritatis sequi voluptatum adipisci! Illum at distinctio nemo, quis sed quo provident commodi.</h1>
+  <div id="home">
+      <vue-headful
+        title="Title from vue-headful"
+        description="Description from vue-headful"
+      />
+    <Header />
+    <Menu />
+    <FooterMob />
   </div>
 </template>
 
 <script>
+import { db } from '../main'
+import Vue from 'vue';
+import Header from "../components/header/Header.vue"
+import FooterMob from "../components/FooterMobail"
+import Menu from "../components/MenuList"
+import vueHeadful from 'vue-headful';
+
+Vue.component('vue-headful', vueHeadful);
 
 export default {
-  name: 'Menu',
-//   components: {
-//   },
+  name: 'Home',
+  components: {
+    Header,
+    Menu,
+    FooterMob
+  },
   data(){
     return{
       post: [],
     }
   },
   methods:{
-
+    send: async ()=> {
+      await db.collection('products').get().then(
+        r => {
+          r.forEach((doc) => {
+            console.log("======>",doc.data())
+          })
+        }
+      ).catch(e=>console.log("error ======>",e))
+      
+      }
   },
-
 }
 </script>
 
