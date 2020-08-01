@@ -11,7 +11,7 @@
 
                 <div class="offer-menu-items" ref="singleOfferCategoryItem">
 
-                        <div  v-for="item in prodCat" :key="`${item.cat}-per-cat`"  :class="['single-offer-category-item', 'isotope-item',item.cat , 'active']">
+                        <div  v-for="(item,index) in prodCat" :key="`${item.cat}-per-cat`"  :class="['single-offer-category-item', 'isotope-item',item.cat , index === 0 ? 'active':'']">
                             <div class="single-offer-item" v-for="(itemProd) in item.products" :key="itemProd.title">
                                  
                                 
@@ -21,7 +21,7 @@
                                             <p>{{itemProd.composition}}</p>
                                         </div>
                                     </div>
-                                    <div class="single-offer-price">${{itemProd.price}}</div>
+                                    <div class="single-offer-price">${{itemProd.price.toFixed(2)}}</div>
                                     <div class="clear"></div>
                                 
 
