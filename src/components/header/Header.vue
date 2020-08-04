@@ -373,6 +373,7 @@ ul.sf-menu li ul li a {
         float: left;
         display: table;
         padding: 15px;
+        z-index: 4;
     }
     .logo {
         float: none;

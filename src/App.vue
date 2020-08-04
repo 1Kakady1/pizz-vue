@@ -165,7 +165,7 @@ body {
     position: relative;
 }
 
-.page-bg {
+/* .page-bg {
     top: 0;
     left: 250px;
     width: 100%;
@@ -175,10 +175,15 @@ body {
     z-index: 0;
     background-repeat: no-repeat;
     background-size: cover;
-}
+} */
 
 .page-wrapper {
 	background: #fcf6ec;
+	padding: 50px;
+}
+
+#Menu .page-wrapper {
+	background: rgb(252 246 236 / 0.86);
 	padding: 50px;
 }
 

@@ -1,8 +1,8 @@
 import VueRouter from 'vue-router'
-
 import Home from "../page/Home"
-import Menu from "../page/Menu"
-
+//import Menu from "../page/Menu"
+const Menu = () => import(/* webpackChunkName: "Menu" */ '../page/Menu.vue')
+import Products from "../page/Products"
 
 export default new VueRouter({
     routes:[
@@ -10,6 +10,11 @@ export default new VueRouter({
             path: '/', 
             component: Home,
             title: "Home" 
+        },
+        { 
+            path: '/products', 
+            component: Products ,
+            title: "Products"
         },
         { 
             path: '/menu', 

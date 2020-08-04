@@ -61,8 +61,6 @@ export default {
 </script>
 
 <style lang="sass">
-  button
-    position: absolute
-    z-index: 111
+
 </style>
 

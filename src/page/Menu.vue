@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="Menu">
       <vue-headful
         title="Title from vue-headful"
         description="Description from vue-headful"

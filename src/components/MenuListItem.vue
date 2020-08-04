@@ -3,9 +3,9 @@
     <div class="page-wrapper">
         
             <div class="offer-menu-wrapper">
-                <ul id="filters" class="single-offer-category-filter option-set" data-option-key="filter">
-                    <li class="filter-cat" v-for="item in prodCat" :key="item.cat">
-                        <a class="selected" @click="tabs(item.cat)">{{item.catTitle}}</a>
+                <ul id="filters" class="single-offer-category-filter option-set" data-option-key="filter" ref="singleOfferCategoryLink">
+                    <li class="filter-cat" v-for="(item,index) in prodCat" :key="item.cat">
+                        <a :class="['', index===0 ? 'selected':'']" @click="tabs(item.cat)">{{item.catTitle}}</a>
                     </li>
                 </ul>
 
@@ -57,15 +57,20 @@ export default {
     methods:{
         tabs(cat){
             const tabs = this.$refs.singleOfferCategoryItem;
-            //let h_buf = 0;
+            const tabsLink = this.$refs.singleOfferCategoryLink.children;
+            //let h_buf = 0; filter-cat
+            console.log("tabsLink----------->",tabsLink)
+            tabs.children.forEach((element,index) => {
 
-            tabs.children.forEach(element => {
                 element.classList.remove("active")
+                tabsLink[index].children[0].classList.remove("selected");
+
                 if(element.classList.contains(cat)){
                 
                     element.classList.add("active");
-                
+                     tabsLink[index].children[0].classList.add("selected");    
                    // setTimeout(()=>{
+                       
                         tabs.style.height = element.clientHeight+"px";
                     //},605)
                 }
@@ -112,6 +117,15 @@ export default {
     .slideMenu-enter, .slideMenu-leave-to {
         overflow: hidden;
         max-height: 0;
+    }
+
+    .filter-cat{
+        cursor: pointer;
+    }
+
+    #filters{
+        position: relative;
+        z-index: 10;
     }
 
 </style>

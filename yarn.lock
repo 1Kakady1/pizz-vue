@@ -8966,11 +8966,6 @@ vue-headful@^2.1.0:
   dependencies:
     headful "^1.0.3"
 
-vue-helmet@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/vue-helmet/-/vue-helmet-1.1.5.tgz#ff66bfd2de38eb0df0e1a98157a2d1996035462d"
-  integrity sha1-/2a/0t446w3w4amBV6LRmWA1Ri0=
-
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
@@ -9013,7 +9008,14 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha1-HuO8mhbsv1EYvjNLsV+cRvgvWCU=
 
-vue@^2.6.11:
+vue-wow@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/vue-wow/-/vue-wow-1.2.0.tgz#3486172ee6bd3428c9e558c99f456c1c8e077a33"
+  integrity sha512-GeH6YSvzdnDgvxHbHx1KMmDyrlLFmy6ForVHfbSfATexXHzq8U1F3dkjsQwsk0j8QyRfXzFnt3kgivb3Yoo1yA==
+  dependencies:
+    vue "^2.5.2"
+
+vue@^2.5.2, vue@^2.6.11:
   version "2.6.11"
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha1-dllNh31LEiNEBuhONSdcbVFBJcU=
@@ -9024,6 +9026,11 @@ vuefire@^2.2.0-alpha.0:
   integrity sha512-nuPr1JJdOmy8zceOmmi7o7H7Iz7/IBHib/+hUHeDK6gVC1DE1mmoSgiy0CwL7bmTJ+SFd30F8lA6TeKNCBrNMg==
   dependencies:
     "@posva/vuefire-core" "^2.2.0-alpha.0"
+
+vuex@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.5.1.tgz#f1b8dcea649bc25254cf4f4358081dbf5da18b3d"
+  integrity sha512-w7oJzmHQs0FM9LXodfskhw9wgKBiaB+totOdb8sNzbTB2KDCEEwEs29NzBZFh/lmEK1t5tDmM1vtsO7ubG1DFw==
 
 watchpack-chokidar2@^2.0.0:
   version "2.0.0"
