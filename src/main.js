@@ -5,7 +5,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import VueRouter from 'vue-router'
 import router from "./routes/routes"
-
+import store from "./store/store"
 
 Vue.use(firestorePlugin)
 Vue.use(VueRouter)
@@ -28,5 +28,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
