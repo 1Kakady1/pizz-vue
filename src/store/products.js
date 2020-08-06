@@ -78,13 +78,12 @@ export default {
   },
   actions:{
     async [GET_PRODUCTS]({commit}){
-     // console.log("get_prod", db.collection(' products').doc('pizza').collection("cat-pizza").where("hide", "==", false).get())
-     //https://firebase.google.com/docs/firestore/query-data/query-cursors
-     //https://firebase.google.com/docs/firestore/query-data/order-limit-data
+
       db.collection(' products').doc('pizza').collection("cat-pizza")
         .where("hide", "==", false)
-        //.orderBy("price")
-        //.startAfter(4)
+        .orderBy("price")
+//.startAfter(4*2)
+        //.endAt(4)
         .limit(4)
         .get()
         .then(res=>{
