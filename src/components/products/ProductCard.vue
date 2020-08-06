@@ -1,10 +1,7 @@
 <template>
     <div class="offer-menu2-item-single offer-menu2-item-single--def">
+        
         <img class="offer-menu2-frame" src="https://firebasestorage.googleapis.com/v0/b/pizza-vue-fb264.appspot.com/o/images%2Fdesign%2Fframe-v2.png?alt=media&token=67f31d41-82d7-4157-8768-c162caf2defa" />
-        <div class="offer-menu2-shadow"></div>
-        <div class="offer-menu2-thumb">
-            <img class="offer-menu2-inner-frame" src="https://firebasestorage.googleapis.com/v0/b/pizza-vue-fb264.appspot.com/o/images%2Fdesign%2Fshadow-frame.png?alt=media&token=7a91e219-96b2-46fd-8e05-26c3ac9d70fa" />
-        </div>
         <div class="offer-menu2-thumb-image">
             <img :src="product.image" width="313" height="220" alt="" />
         </div>
@@ -17,7 +14,7 @@
             <div class="single-offer-menu2-content">
                 <p>{{product.composition}}</p>
             </div>
-            <div class="single-offer-menu2-price">{{product.price.toFixed(2)}}</div>
+            <div class="single-offer-menu2-price">{{product.price.toFixed(2)}} {{cur}}</div>
 
             <div class="single-offer-menu2-nav">
             <button class="product-open">Подробно</button>
@@ -35,10 +32,15 @@
 <script>
 
 import { ADD_TO_CART, SUB_TO_CART } from '../../store/mutation-type'
+import {cur} from '../../helpers/const.js'
 
 export default {
   name: 'ProductCard',
-
+    data(){
+        return{
+            cur: cur
+        }
+    },
     props:{
          product:{
              type: Object,
@@ -126,7 +128,7 @@ export default {
 .offer-menu2-thumb-image {
     display: block;
     line-height: 0;
-    position: absolute;
+    position: relative;
     top: 28px;
     left: 43px;
 }
@@ -188,7 +190,7 @@ span.offer-menu2-icon:before {
 
 @media only screen and (max-width: 1160px) {
     .offer-menu2-item-single {
-        width: 50%;
+        width: 100%;
     }
     .offer-menu2-thumb-image {
         top: 24px;
@@ -317,8 +319,8 @@ span.offer-menu2-icon:before {
 .single-offer-menu2-nav{
   padding-top: 10px;
   display: flex;
-  align-content: center;
-  justify-self: space-between;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -369,6 +371,55 @@ span.offer-menu2-icon:before {
   border: 2px solid #fab940;
   transition: all 450ms ease;
 }
+
+    .offer-menu2-frame{
+        display: none;  
+    }
+
+    .offer-menu2-thumb-image{
+        border: 3px solid #96603d
+    }
+
+    .pizza-wow > div{
+        width: 100%;
+    }
+
+
+@media screen and (min-width: 651px){
+    .offer-menu2-thumb-image{
+        border: none;
+        margin-bottom: 32px;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .pizza-wow > div{
+        width: 50%;
+    }
+    .offer-menu2-thumb-image{
+        border: none;
+        margin-bottom: 32px;
+        text-align: left;
+    }
+}
+
+@media screen and (min-width: 1161px){
+    .offer-menu2-frame{
+        display: block;  
+    }
+
+    .offer-menu2-thumb-image{
+        border: none
+    }
+
+    
+    .offer-menu2-thumb-image {
+        position: absolute;
+    }
+}
+
+
 
 </style>
 
