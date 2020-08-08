@@ -13,7 +13,7 @@
                     <div class="menu-main-nav-menu-container">
                         <ul id="menu-main-nav-menu" class="sf-menu">
                             <li v-for="item in renderMenuList" :class="{active: $route.path === item.path,'menu-item':true}" :key="item.title">
-                               <router-link  :to="item.path" >{{item.title}}</router-link> 
+                               <router-link  :to="item.pathNav" >{{item.title}}</router-link> 
                             </li>
                         </ul>
                     </div>

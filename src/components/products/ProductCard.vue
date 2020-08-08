@@ -17,7 +17,10 @@
             <div class="single-offer-menu2-price">{{product.price.toFixed(2)}} {{cur}}</div>
 
             <div class="single-offer-menu2-nav">
-            <button class="product-open">Подробно</button>
+                <router-link to="/products/pizza/pr-1">
+<button class="product-open">Подробно</button>
+                </router-link>
+            
             <div class="single-offer-menu2-cart--btn">
                 <button class="product-btn product-sub" @click="subCart(product.id,product.price.toFixed(2))">-</button>
                 <div class="single-offer-menu2-count">{{product.count}}</div>

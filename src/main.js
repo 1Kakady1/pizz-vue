@@ -6,9 +6,11 @@ import 'firebase/firestore'
 import VueRouter from 'vue-router'
 import router from "./routes/routes"
 import store from "./store/store"
+//import velocityPlugin from 'velocity-vue'
 
 Vue.use(firestorePlugin)
 Vue.use(VueRouter)
+//Vue.use(velocityPlugin)
 
 
 firebase.initializeApp({
