@@ -1,7 +1,7 @@
 <template>
   <div id="Products-page">
       <vue-headful
-        title="Title from vue-headful"
+        :title="'Product category - '+$route.params.cat"
         description="Description from vue-headful"
       />
     <Header />
@@ -69,11 +69,9 @@
         <!-- end container -->
         <div class="clear"></div>
     </div>
-  <!-- <router-link  to="/products/pizza/pr-1" >test</router-link> -->
-    <transition :name="transitionName">
-      <router-view :key="$route.path"></router-view>
-    </transition>
-   
+
+    <router-view :key="$route.path"></router-view>
+    
     <FooterMob />
   </div>
 </template>
@@ -110,7 +108,7 @@ export default {
     },
     mounted(){
 
-      console.log('cat',this.$route.params)
+      console.log('cat 1',this.$route.params)
 
         if(this.$store.getters.getProducts.length <= 0){
           this.$store.dispatch(GET_PRODUCTS);
@@ -121,14 +119,14 @@ export default {
 
     },
 
-  watch: {
-    $route(to, from) {
-      const toDepth = to.path.split('/').length
-      const fromDepth = from.path.split('/').length
-      console.log(toDepth < fromDepth ? 'slide-right' : 'slide-left')
-      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-    }
-  }
+  // watch: {
+  //   $route(to, from) {
+  //     const toDepth = to.path.split('/').length
+  //     const fromDepth = from.path.split('/').length
+  //     console.log(toDepth < fromDepth ? 'slide-right' : 'slide-left')
+  //     this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+  //   }
+  // }
 }
 </script>
 

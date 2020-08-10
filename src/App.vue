@@ -25,6 +25,22 @@ export default {
         url("/fonts/OpenSans-Regular-webfont.woff") format("woff");
 } */
 
+    @media screen and (min-width: 996px){
+        ::-webkit-scrollbar-track:hover{
+            border-left: solid 1px #fff;
+            background-color: #fff}
+        ::-webkit-scrollbar-track{
+            border-width: 0;
+            background-color: #fff}
+
+        ::-webkit-scrollbar-thumb{
+            background-color: #fab940}
+
+        ::-webkit-scrollbar{
+            width: 8px}
+	}
+
+
 * { 
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;

@@ -1,4 +1,4 @@
-import { ADD_TO_CART, SUB_TO_CART, GET_PRODUCTS, PUSH_PRODUCTS } from './mutation-type.js'
+import { ADD_TO_CART, SUB_TO_CART, GET_PRODUCTS, PUSH_PRODUCTS, GET_PRODUCT } from './mutation-type.js'
 import { db } from '../main'
 import {set_cookie,getCookie} from '../helpers/function'
 
@@ -61,8 +61,14 @@ export default {
 
     },
     [PUSH_PRODUCTS](state,b){
-      const countProd = state.cart.findIndex(x=>x.id === b.id) ;
-      state.products.push({...b,count:countProd !== -1 ? state.cart[countProd].count : 0});
+
+      const issetProd = state.products.findIndex(x=>x.id === b.id) ;
+
+      if(issetProd === -1){
+        const countProd = state.cart.findIndex(x=>x.id === b.id) ;
+        state.products.push({...b,count:countProd !== -1 ? state.cart[countProd].count : 0});
+      }
+      
     },
 
     addProduct(state){
@@ -76,12 +82,36 @@ export default {
     getProducts(state){
       return  state.products
     },
+    getProduct: state => id  =>{
+      return  state.products.find(x=>x.url === id)
+    },
     getCart(state){
       return  state.cart
     }
 
   },
   actions:{
+
+    async [GET_PRODUCT]({commit,state},payload){
+
+      const getCookies = getCookie('products');
+
+      if(getCookies !== null && getCookies !== undefined && getCookies !== ''){
+        state.cart = JSON.parse(getCookies);
+      }
+
+      await db.collection(' products').doc('pizza').collection(`cat-${payload.cat}`)
+      .where("url", "==", payload.product)
+      .get()
+      .then(res=>{
+        res.docs.forEach(item=>{
+          console.log("get prod", item.data())
+          commit(PUSH_PRODUCTS,{...item.data(),id:item.id})
+        })
+      })
+
+    },
+
     async [GET_PRODUCTS]({commit,state}){
 
       const getCookies = getCookie('products');
@@ -98,7 +128,7 @@ export default {
         //.limitToFirst(1+1)
         .startAfter(4+2)
         //.endAt(4)
-        .limit(4)
+        //.limit(4)
         .get()
         .then(res=>{
           res.docs.forEach(item=>{
