@@ -1,7 +1,7 @@
 <template>
   <div id="home">
       <vue-headful
-        title="Title from vue-headful"
+        title="Pizza home page"
         description="Description from vue-headful"
       />
     <Header />
@@ -14,20 +14,18 @@
 
 <script>
 import { db } from '../main'
-import Vue from 'vue';
 import Header from "../components/header/Header.vue"
 import FooterMob from "../components/FooterMobail"
 import SliderHome from "../components/sliders/SliderHome.vue"
 import vueHeadful from 'vue-headful';
-
-Vue.component('vue-headful', vueHeadful);
 
 export default {
   name: 'Home',
   components: {
     Header,
     SliderHome,
-    FooterMob
+    FooterMob,
+    vueHeadful
   },
   data(){
     return{

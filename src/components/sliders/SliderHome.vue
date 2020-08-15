@@ -20,7 +20,7 @@
                 <span 
                     v-for="(item,index) in slidesItem" :key="`home-slide-dot-${index}`" 
                     @click="slideGoTo(index)" 
-                    :style="{backgroundImage: `url(${item.bg})`}"
+                    :style="{backgroundImage: `url(${item.type === 'video' ? imgNo : item.bg})`}"
                     class="swiper-pagination__dot" 
                 >
                    
@@ -46,6 +46,7 @@
     import 'swiper/swiper-bundle.css'
     import Preloader from "../Preloader"
     import { eventEmmiter } from '../../main'
+    import noImg from '../../assets/img/bmm.jpg'
     
     export default {
         name: 'SliderHome',
@@ -62,6 +63,7 @@
         },
         data() {
             return {
+                imgNo: noImg,
                 swiperOption: {
                 effect: 'fade',
                 loop: true,
@@ -107,9 +109,6 @@
         computed: {
             swiper() {
                 return this.$refs.mySwiper.$swiper
-            },
-            swiper2() {
-                return this.$refs.mySwiper
             },
         },
 
@@ -259,7 +258,7 @@
             left: 6%
             font-size: 92px;
         .title-v1
-            top: 25%
+            top: 36%
             left: 12%
             font-size: 58px;
         .swiper-slide
@@ -268,6 +267,10 @@
             &.swiper-slide-active
                 .title-v1,.desc-v1
                     transform: translateX(0%)
+    @media screen and (min-width: 1700px)
+        .title-v1
+            top: 25%
+
 
 
 </style>

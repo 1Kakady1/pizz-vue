@@ -69,7 +69,7 @@ export default {
                 undefined,
                 this.nextSlide
             );
-      },1000000)
+      },10000)
   },
   destroyed() {
     clearInterval(this.sliderTimer);

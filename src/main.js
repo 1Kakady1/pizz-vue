@@ -6,12 +6,12 @@ import 'firebase/firestore'
 import VueRouter from 'vue-router'
 import router from "./routes/routes"
 import store from "./store/store"
-//import velocityPlugin from 'velocity-vue'
+import Vuelidate from 'vuelidate'
+
 
 Vue.use(firestorePlugin)
 Vue.use(VueRouter)
-//Vue.use(velocityPlugin)
-
+Vue.use(Vuelidate)
 
 firebase.initializeApp({
   apiKey: "AIzaSyDWlF4SN4zWZ8V6NJpUUesM1l6hEUh40G4",

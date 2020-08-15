@@ -126,7 +126,7 @@ export default {
         .orderBy("price")
         //.startAt(1)
         //.limitToFirst(1+1)
-        .startAfter(4+2)
+        //.startAfter(4+2)
         //.endAt(4)
         //.limit(4)
         .get()
