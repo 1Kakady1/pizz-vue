@@ -1,19 +1,27 @@
 <template>
   <div id="app">
 	<router-view></router-view>
+	<Cart />
+	<CartOpenBtn />
   </div>
 </template>
 
 <script>
 
-//import Home from "./page/Home.vue"
+import Cart from "./components/cart/Cart.vue"
+import CartOpenBtn from "./components/cart/CartBtnOpen.vue"
+import {SET_PRODUCT_TO_CART} from './store/mutation-type'
 
 
 export default {
   name: 'App',
-//   components: {
-//     Home
-//   }
+  components: {
+	Cart,
+	CartOpenBtn
+  },
+  mounted(){
+	this.$store.dispatch(SET_PRODUCT_TO_CART,{cat:"pizza"});
+  }
 }
 </script>
 

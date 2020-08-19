@@ -61,7 +61,7 @@
 
                 <h1 class="single-product-title" >{{prod.title}}</h1>
 
-                <div class="single-product-info-contain">
+                <div class="single-product-info-contain" v-if="prod.info !== undefined && prod.info !== null">
                     <div class="single-product-info-title"> 
                         Energy value per 100 grams:
                     </div>
@@ -97,22 +97,22 @@
 </template>
 
 <script>
+
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
 import { TweenMax } from 'gsap';
 import { ADD_TO_CART, SUB_TO_CART, GET_PRODUCT } from '../../store/mutation-type'
 import {cur} from '../../helpers/const.js'
 import vueHeadful from 'vue-headful';
-//import {isset} from '../../helpers/function.js'
-//Vue.component('vue-headful', vueHeadful);
+
 export default {
   name: 'SingleProduct',
     data(){
         return{
+            isLoad: false,
             cur: cur,
             swiperOptions: {
                 loop: true,
-                //touchRatio: 0,
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true
@@ -141,7 +141,7 @@ export default {
 
         const getProductMounted = async ()=>{
             await this.$store.dispatch(GET_PRODUCT,this.$route.params);
-            console.log( "---------------->",this.prod)
+            //this.isLoad = false;
         }
 
         getProductMounted();
@@ -212,6 +212,11 @@ export default {
     directives: {
         swiper: directive
     },
+    watch:{
+        prod:(newValue, oldValue)=>{
+            console.log(`Updating from ${oldValue} to ${newValue}`);
+        },
+    }
 }
 </script>
 

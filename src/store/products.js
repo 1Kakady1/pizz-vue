@@ -1,6 +1,8 @@
-import { ADD_TO_CART, SUB_TO_CART, GET_PRODUCTS, PUSH_PRODUCTS, GET_PRODUCT } from './mutation-type.js'
+import { ADD_TO_CART, SUB_TO_CART, GET_PRODUCTS, PUSH_PRODUCTS, GET_PRODUCT,SET_PRODUCT_TO_CART } from './mutation-type.js'
 import { db } from '../main'
 import {set_cookie,getCookie} from '../helpers/function'
+
+/* eslint-disable no-debugger */
 
 export default {
   state: {
@@ -13,7 +15,7 @@ export default {
 
       const indexCart = state.cart.findIndex(x=>x.id === payload.id);
       const indexProd = state.products.findIndex(x=>x.id === payload.id);
-
+      
       if(indexCart !== -1){
 
         state.cart[indexCart].count += 1; 
@@ -22,17 +24,19 @@ export default {
       } else {
 
         state.products[indexProd].count += 1; 
+
         state.cart.push({
           id: payload.id,
           count: 1,
-          price: payload.price
+          price: payload.price,
+          title: state.products[indexProd].title,
+          preview: state.products[indexProd].image,
+          url:  state.products[indexProd].url
         }); 
 
       }
 
       set_cookie("products",JSON.stringify(state.cart ),34); 
-
-      console.log("add",state.cart)
     },
     [SUB_TO_CART](state,payload=null){
 
@@ -63,12 +67,20 @@ export default {
     [PUSH_PRODUCTS](state,b){
 
       const issetProd = state.products.findIndex(x=>x.id === b.id) ;
-
-      if(issetProd === -1){
-        const countProd = state.cart.findIndex(x=>x.id === b.id) ;
-        state.products.push({...b,count:countProd !== -1 ? state.cart[countProd].count : 0});
-      }
+      const countProd = state.cart.findIndex(x=>x.id === b.id) ;
       
+      //debugger;
+      if(issetProd === -1){
+
+        state.products.push({...b,count:countProd !== -1 ? state.cart[countProd].count : 0});
+
+      } else if(countProd !== -1){
+
+        state.products[issetProd].count= state.cart[countProd].count;
+        state.products[issetProd].price= state.cart[countProd].price;
+
+      }
+
     },
 
     addProduct(state){
@@ -82,8 +94,8 @@ export default {
     getProducts(state){
       return  state.products
     },
-    getProduct: state => id  =>{
-      return  state.products.find(x=>x.url === id)
+    getProduct: state => url  =>{
+      return  state.products.find(x=>x.url === url)
     },
     getCart(state){
       return  state.cart
@@ -91,6 +103,27 @@ export default {
 
   },
   actions:{
+
+    async [SET_PRODUCT_TO_CART]({commit,state},payload){
+
+      const getCookies = getCookie('products');
+
+      if(getCookies !== null && getCookies !== undefined && getCookies !== ''){
+
+        state.cart = JSON.parse(getCookies);
+        state.cart.forEach(async (item)=>{
+          await db.collection(' products').doc('pizza').collection(`cat-${payload.cat}`)
+          .where("url", "==", item.url)
+          .get()
+          .then(res=>{
+            res.docs.forEach(item=>{
+              commit(PUSH_PRODUCTS,{...item.data(),id:item.id})
+            })
+          });
+        })
+
+      }
+    },
 
     async [GET_PRODUCT]({commit,state},payload){
 
@@ -105,7 +138,7 @@ export default {
       .get()
       .then(res=>{
         res.docs.forEach(item=>{
-          console.log("get prod", item.data())
+          //console.log("get prod", item.data())
           commit(PUSH_PRODUCTS,{...item.data(),id:item.id})
         })
       })
@@ -118,7 +151,6 @@ export default {
 
       if(getCookies !== null && getCookies !== undefined && getCookies !== ''){
         state.cart = JSON.parse(getCookies);
-        console.log("cart state ====>",state.cart);
       }
 
       db.collection(' products').doc('pizza').collection("cat-pizza")

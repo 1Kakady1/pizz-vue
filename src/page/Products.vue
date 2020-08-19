@@ -110,9 +110,9 @@ export default {
 
       console.log('cat 1',this.$route.params)
 
-        if(this.$store.getters.getProducts.length <= 0){
-          this.$store.dispatch(GET_PRODUCTS);
-        }
+      //if(this.$store.getters.getProducts.length <= 0){
+        this.$store.dispatch(GET_PRODUCTS);
+      //}
         
     },
     methods:{

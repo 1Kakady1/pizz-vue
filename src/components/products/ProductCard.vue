@@ -22,9 +22,9 @@
                 </router-link>
             
             <div class="single-offer-menu2-cart--btn">
-                <button class="product-btn product-sub" @click="subCart(product.id,product.price.toFixed(2))">-</button>
+                <button class="product-btn product-sub" @click="subCart(product.id,product.price)">-</button>
                 <div class="single-offer-menu2-count">{{product.count}}</div>
-                <button class="product-btn product-add" @click="addCart(product.id,product.price.toFixed(2))">+</button>
+                <button class="product-btn product-add" @click="addCart(product.id,product.price)">+</button>
             </div>
             </div>
         </div>

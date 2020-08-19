@@ -68,12 +68,23 @@
                                             <span class="wpcf7-form-control-wrap name-input">
                                                 <input name="name"  id="name" type="text" value="" size="40" 
                                                 class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" 
-                                                aria-required="true" aria-invalid="false" placeholder="Name" v-model="$v.name.$model"/>
+                                                aria-required="true" aria-invalid="false" placeholder="Name"
+                                                @blur="$v.name.$touch()" 
+                                                v-model="name"/>
                                             </span>
-
+                                            <!-- <pre>
+                                            {{
+                                                $v.name
+                                            }}
+                                            </pre> -->
                                             <transition name="input-error-anim">
-                                                <div class="error" v-if="!$v.name.required">
-                                                    This field is required for filling
+                                                <div class="error-container" v-if="$v.name.$error">
+                                                    <div class="error" v-if="!$v.name.required">
+                                                        This field is required for filling
+                                                    </div>
+                                                    <div class="error" v-if="!$v.name.minLength">
+                                                        Min length {{$v.name.$params.minLength.min}}
+                                                    </div>
                                                 </div>
                                             </transition>
 
@@ -82,27 +93,75 @@
                                             <span class="wpcf7-form-control-wrap email-input">
                                                 <input name="mail" id="mail" type="text"  value="" size="40" 
                                                 class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" 
-                                                aria-required="true" aria-invalid="false" placeholder="Email" v-model="$v.email.$model"/>
+                                                aria-required="true" aria-invalid="false" placeholder="Email"
+                                                @blur="$v.email.$touch()" 
+                                                v-model="email"/>
                                             </span>
+                                            <transition name="input-error-anim">
+                                                <div class="error-container" v-if="$v.email.$error">
+                                                    <div class="error" v-if="!$v.email.required">
+                                                        This field is required for filling
+                                                    </div>
+                                                    <div class="error" v-if="!$v.email.email">
+                                                        Please enter correct email
+                                                    </div>
+                                                </div>
+                                            </transition>
                                         </div>
                                         <p>
                                             <span class="wpcf7-form-control-wrap appointment-message">
                                                 <textarea name="comment" id="comment"  cols="40" rows="10" 
                                                 class="wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required" 
-                                                aria-required="true" aria-invalid="false" placeholder="Message" v-model="$v.msg.$model"></textarea>
+                                                aria-required="true" aria-invalid="false" placeholder="Message"
+                                                @blur="$v.msg.$touch()"
+                                                v-model="msg"></textarea>
                                             </span> 
+                                            <transition name="input-error-anim">
+                                                <div class="error-container" v-if="$v.msg.$error">
+                                                    <div class="error" v-if="!$v.msg.required">
+                                                        This field is required for filling
+                                                    </div>
+                                                    <div class="error" v-if="!$v.msg.minLength">
+                                                        Min length {{$v.name.$params.minLength.min}}
+                                                    </div>
+                                                </div>
+                                            </transition>
                                         </p>
                                         
                                         <div class="clear"></div>
                                         
                                         <div class="contact-submit">
-                                            <input type="submit" 
-                                                value="Send message" 
-                                                class="wpcf7-form-control wpcf7-submit"  
-                                                id="submit_contact"
-                                                @click.prevent="submitForm" 
-                                            />
-                                            <div id="msg" class="message"></div>
+                                            <transition name="input-error-anim">
+                                                <input type="submit"  
+                                                    v-if="!isLoad"
+                                                    :value="notif.print" 
+                                                    class="wpcf7-form-control wpcf7-submit"  
+                                                    id="submit_contact"
+                                                    :disabled="notif.active"
+                                                    @click.prevent="submitForm" 
+                                                />
+                                            
+                                                <div class="load" v-else>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                                                        <circle cx="84" cy="50" r="10" fill="#fab940">
+                                                            <animate attributeName="r" repeatCount="indefinite" dur="1.1904761904761905s" calcMode="spline" keyTimes="0;1" values="10;0" keySplines="0 0.5 0.5 1" begin="0s"></animate>
+                                                            <animate attributeName="fill" repeatCount="indefinite" dur="4.761904761904762s" calcMode="discrete" keyTimes="0;0.25;0.5;0.75;1" values="#fab940;#242424;#fab940;#242424;#fab940" begin="0s"></animate>
+                                                        </circle><circle cx="16" cy="50" r="10" fill="#fab940">
+                                                        <animate attributeName="r" repeatCount="indefinite" dur="4.761904761904762s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s"></animate>
+                                                        <animate attributeName="cx" repeatCount="indefinite" dur="4.761904761904762s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="0s"></animate>
+                                                        </circle><circle cx="50" cy="50" r="10" fill="#242424">
+                                                        <animate attributeName="r" repeatCount="indefinite" dur="4.761904761904762s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1.1904761904761905s"></animate>
+                                                        <animate attributeName="cx" repeatCount="indefinite" dur="4.761904761904762s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-1.1904761904761905s"></animate>
+                                                        </circle><circle cx="84" cy="50" r="10" fill="#fab940">
+                                                        <animate attributeName="r" repeatCount="indefinite" dur="4.761904761904762s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-2.380952380952381s"></animate>
+                                                        <animate attributeName="cx" repeatCount="indefinite" dur="4.761904761904762s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-2.380952380952381s"></animate>
+                                                        </circle><circle cx="16" cy="50" r="10" fill="#242424">
+                                                        <animate attributeName="r" repeatCount="indefinite" dur="4.761904761904762s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="0;0;10;10;10" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-3.571428571428571s"></animate>
+                                                        <animate attributeName="cx" repeatCount="indefinite" dur="4.761904761904762s" calcMode="spline" keyTimes="0;0.25;0.5;0.75;1" values="16;16;16;50;84" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" begin="-3.571428571428571s"></animate>
+                                                        </circle>
+                                                    </svg>
+                                                </div>
+                                            </transition>
                                         </div>
                                     </div>
                                 </form>
@@ -140,31 +199,54 @@ export default {
   data(){
     return{
         //contactForm:{
-            name: '',
-            email: '',
-            msg: '',
+        name: '',
+        email: '',
+        msg: '',
         //},
-        inputKey:['name','email','msg']
+        formInputSettig:{
+
+        },
+        inputKey:['name','email','msg'],
+        isLoad: false,
+        notif:{
+            def:"Send message",
+            error: "Error!",
+            success:"Message send ok !",
+            active: false,
+            print: "Send message"
+        }
     }
   },
   methods:{
 
       submitForm(){
-         // this.inputKey.forEach((item,index)=>{
-                // console.log("submitForm-------->",!this.$v.$anyDirty);
-                // console.log("submitForm-------->",this.$v.$anyError);
-                console.log("submitForm-------->",this.$v);
-               
-         // })
+
+         // this.isLoad = !this.isLoad;
+          //let errorFlag = true;
+          this.inputKey.forEach((item)=>{
+                console.log("submitForm-------->",this.$v[item],item);
+                // if(this.$v[item].$anyDirty === false){
+                //     this.$v[item].$error = true;
+                // } else {
+                    // if(this.$v[item].$error === true){
+
+                    // }
+               // }
+          })
           
       }
 
   },
+//   computed: {
+//     notifMessage: function (key='def') {
+//       return this.notif[key]
+//     }
+//   },
   validations: {
    // contactForm:{
         name: {
             required,
-            minLength: minLength(4)
+            minLength: minLength(4),
         },
         email: {
             required,
@@ -180,6 +262,22 @@ export default {
 </script>
 
 <style scoped>
+.contact-submit{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    min-height: 64px;
+}
+.load {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.load svg{
+    width: 120px;
+    height: 64px;
+}
 
 #container {
     width: 100%;
