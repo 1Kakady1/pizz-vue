@@ -1,6 +1,15 @@
-import { ADD_TO_CART, SUB_TO_CART, GET_PRODUCTS, PUSH_PRODUCTS, GET_PRODUCT,SET_PRODUCT_TO_CART } from './mutation-type.js'
+import { 
+
+          ADD_TO_CART, SUB_TO_CART, GET_PRODUCTS, PUSH_PRODUCTS, 
+          GET_PRODUCT,SET_PRODUCT_TO_CART,DEL_TO_CART,CHANGE_WISHES_TO_CART 
+
+       } from './mutation-type.js'
+
 import { db } from '../main'
 import {set_cookie,getCookie} from '../helpers/function'
+
+//localStorage.setItem('myCat', 'Tom');
+//let cat = localStorage.getItem('myCat');
 
 /* eslint-disable no-debugger */
 
@@ -38,6 +47,29 @@ export default {
 
       set_cookie("products",JSON.stringify(state.cart ),34); 
     },
+    [CHANGE_WISHES_TO_CART](state,payload=null){
+
+      const indexCart = state.cart.findIndex(x=>x.id === payload.id);
+
+      if(indexCart !== -1){
+        state.cart[indexCart].wishes = payload.wishes;
+        set_cookie("products",JSON.stringify(state.cart ),34);
+      } 
+
+    },
+    [DEL_TO_CART](state,payload=null){
+
+      const indexCart = state.cart.findIndex(x=>x.id === payload.id);
+      const indexProd = state.products.findIndex(x=>x.id === payload.id);
+
+      //if(indexProd !== -1){
+
+        state.products[indexProd].count = 0;    
+        state.cart.splice(indexCart,1);
+        set_cookie("products",JSON.stringify(state.cart ),34);
+
+      //}
+    },
     [SUB_TO_CART](state,payload=null){
 
       const indexCart = state.cart.findIndex(x=>x.id === payload.id);
@@ -55,7 +87,6 @@ export default {
         if (state.cart[indexCart].count <=0) {
 
           state.products[indexProd].count = 0; 
-          console.log("sub del",indexProd);
           state.cart.splice(indexCart,1);
         }
 
@@ -64,6 +95,11 @@ export default {
       set_cookie("products",JSON.stringify(state.cart ),34);
 
     },
+    // updCartItems(state,b){
+    //   const indexCartProd = state.cart.findIndex(x=>x.id === b.id);
+    //   state.cart[indexCartProd].price;
+
+    // },
     [PUSH_PRODUCTS](state,b){
 
       const issetProd = state.products.findIndex(x=>x.id === b.id) ;
@@ -78,6 +114,7 @@ export default {
 
         state.products[issetProd].count= state.cart[countProd].count;
         state.products[issetProd].price= state.cart[countProd].price;
+        state.cart[countProd].preview = state.products[issetProd].image;
 
       }
 

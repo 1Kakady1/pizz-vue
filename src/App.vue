@@ -33,6 +33,20 @@ export default {
         url("/fonts/OpenSans-Regular-webfont.woff") format("woff");
 } */
 
+a:active, a:focus { outline: none; }
+input, textarea {outline:none;}
+input:active, textarea:active {outline:none;}
+:focus {outline:none;}
+textarea {resize:none;}
+textarea {resize:vertical;}
+textarea {resize:horizontal;}
+button:active, button:focus {
+  outline: none;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+
     @media screen and (min-width: 996px){
         ::-webkit-scrollbar-track:hover{
             border-left: solid 1px #fff;

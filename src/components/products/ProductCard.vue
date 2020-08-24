@@ -71,8 +71,13 @@ export default {
 </script>
 
 <style>
-.offer-menu2-thumb-image img{
+.offer-menu2-thumb-image{
     height: 220px;
+    width: 313px;
+    margin-bottom: 32px;
+}
+.offer-menu2-thumb-image img{
+    height: 100%;
 }
 .offer-menu2-item-single--def .offer-menu2-icon.flaticon-pizza-slice svg{
     width: 55px;
@@ -199,10 +204,12 @@ span.offer-menu2-icon:before {
         top: 24px;
         left: 36px;
     }
-    
-    .offer-menu2-thumb-image img {
-        width: 264px;
+    .offer-menu2-thumb-image{
+         width: 264px;
     }
+    /* .offer-menu2-thumb-image img {
+        width: 264px;
+    } */
     
     .offer-menu2-thumb {
         top: 24px;
@@ -229,10 +236,12 @@ span.offer-menu2-icon:before {
         top: 18px;
         left: 35px;
     }
-    
-    .offer-menu2-thumb-image img {
+    .offer-menu2-thumb-image {
         width: 223px;
     }
+    /* .offer-menu2-thumb-image img {
+        width: 223px;
+    } */
     
     .offer-menu2-thumb {
         top: 18px;
@@ -393,6 +402,7 @@ span.offer-menu2-icon:before {
         border: none;
         margin-bottom: 32px;
         text-align: center;
+        margin-bottom: 20px;
     }
 }
 
